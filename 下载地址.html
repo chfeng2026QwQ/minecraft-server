@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MC Server 5¥ Download</title>
+<style>
+body{background:#1a1a2e;color:#fff;text-align:center;padding:50px;font-family:微软雅黑}
+.title{font-size:30px;color:#00d4ff}
+.price{font-size:24px;color:#ff4477;margin:20px 0}
+.qrcode{max-width:280px;border:5px solid #fff;border-radius:10px}
+.btn{padding:15px 40px;background:#00d4ff;color:#fff;font-size:18px;border:none;border-radius:50px;margin-top:20px;cursor:pointer}
+#code{margin-top:15px;font-size:18px;color:#ff4477;font-weight:bold}
+.lang{margin-bottom:20px}
+.lang button{padding:8px 16px;margin:0 5px;background:#222;color:#fff;border:1px solid #00d4ff;border-radius:6px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- 语言切换 -->
+<div class="lang">
+    <button onclick="setLang('zh')">中文</button>
+    <button onclick="setLang('en')">English</button>
+</div>
+
+<!-- 中文 -->
+<div id="zh" style="display:block">
+    <div class="title">我的世界专属服务器</div>
+    <div class="price">价格：5 元</div>
+</div>
+
+<!-- 英文 -->
+<div id="en" style="display:none">
+    <div class="title">My World MC Server</div>
+    <div class="price">Price: 5 CNY</div>
+</div>
+
+<img class="qrcode" src="https://s3.bmp.ovh/2026/04/06/pEV9Nqne.png" alt="付款码">
+
+<br><br>
+
+<!-- 网盘链接按钮（保留你原来的！） -->
+<a href="https://pan.baidu.com/s/1Wisqs5ZNWbaJroRXAF2r5Q" target="_blank" class="btn">
+    <span id="link_zh">打开网盘链接</span>
+    <span id="link_en" style="display:none">Open Baidu Pan</span>
+</a>
+
+<!-- 提取码按钮 -->
+<button class="btn" onclick="showCode()">
+    <span id="btn_zh">已付款，查看提取码</span>
+    <span id="btn_en" style="display:none">Paid, Show Extract Code</span>
+</button>
+
+<div id="code"></div>
+
+<script>
+// 语言切换
+function setLang(lang){
+    document.getElementById('zh').style.display = lang=='zh'?'block':'none';
+    document.getElementById('en').style.display = lang=='zh'?'none':'block';
+    document.getElementById('btn_zh').style.display = lang=='zh'?'inline':'none';
+    document.getElementById('btn_en').style.display = lang=='zh'?'none':'inline';
+    document.getElementById('link_zh').style.display = lang=='zh'?'inline':'none';
+    document.getElementById('link_en').style.display = lang=='zh'?'none':'inline';
+}
+
+// 防破解
+document.addEventListener('contextmenu', e=>e.preventDefault());
+document.addEventListener('keydown', e=>{
+    if(e.key=='F12'||(e.ctrlKey&&e.key=='U')){
+        e.preventDefault();
+    }
+});
+
+// 验证密码
+function showCode(){
+    var isZh = document.getElementById('zh').style.display == 'block';
+    var pwd = prompt(isZh ? "请输入支付验证密码：" : "Enter payment password:");
+    
+    // 正确密码：mc5yuan
+    if(pwd === atob("bWM1eXVhbg==")){
+        document.getElementById("code").innerText = isZh ? "提取码：mc66" : "Extract Code: mc66";
+    }else{
+        alert(isZh ? "密码错误！" : "Wrong Password!");
+        document.getElementById("code").innerText = "";
+    }
+}
+</script>
+
+</body>
+</html>
